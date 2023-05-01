@@ -28,4 +28,8 @@ export const ItemCredit = styled.li`
 export const NameCredit = styled.p`
     font-weight: 500;
     font-size: 20px;
+
+    &:last-child {
+        color: red;
+    }
 `;

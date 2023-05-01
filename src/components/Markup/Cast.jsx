@@ -1,6 +1,5 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ImgCredit, ItemCredit, ListCredits, NameCredit} from '../StyleComponent/Cast.styled'
 
@@ -29,12 +28,14 @@ export default function Cast() {
                 <ItemCredit key={credit.id && credit.id}>
                     <ImgCredit
                         src={
-                            credit.profile_path &&
-                            `https://image.tmdb.org/t/p/original${credit.profile_path}`
+                            credit.profile_path ?
+                            `https://image.tmdb.org/t/p/original${credit.profile_path}` :
+                            'https://abrakadabra.fun/uploads/posts/2021-12/1640528661_1-abrakadabra-fun-p-serii-chelovek-na-avu-1.png'
                         }
                         alt=''
                     />
                     <NameCredit >{credit.name}</NameCredit>
+                    <NameCredit>{credit.character}</NameCredit>
                 </ItemCredit>
             ))}
         </ListCredits>;

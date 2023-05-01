@@ -108,7 +108,7 @@ export const ListItem = styled.li`
 export const NavLink = styled(Link)`
 text-decoration: none;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 20px;
     letter-spacing: 0.02em;
     line-height: 1.14;
     padding: 20px 20px;

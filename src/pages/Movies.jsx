@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Container } from 'components/StyleComponent/MoviesDetails.styled';
 import {
     MovieList,
@@ -7,26 +8,39 @@ import {
     MovieLink,
     ImgPages,
 } from '../components/StyleComponent/Pages.styled';
-import { Link } from 'react-router-dom';
 
-const Home = () => {
+export default function Movies() {
     const [movies, setMovies] = useState([]);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const movieName = searchParams.get('movieName') ?? '';
     useEffect(() => {
-        async function getMovies() {
+        async function getQuery(query) {
             try {
                 const response = await axios.get(
-                    'https://api.themoviedb.org/3/trending/movie/day?api_key=3371eb177fbad0ff5df328740d3861be'
+                    `https://api.themoviedb.org/3/search/movie?api_key=3371eb177fbad0ff5df328740d3861be&language=en-US&query=${query}`
                 );
                 setMovies(response.data.results);
             } catch (error) {
-                console.log('помилка на отримані трендів');
+                console.log('Помилка на пошуку');
             }
         }
-        getMovies();
-    }, []);
+        getQuery(movieName)
+    }, [movieName]);
+    const updateQuery = evt => {
+        const movieNameValue = evt.target.value;
+        if (movieNameValue === '') {
+            return setSearchParams({});
+        }
+        setSearchParams({ movieName: movieNameValue });
+    };
+
     return (
         <>
-            <h1>Trending today</h1>
+            <input
+                type="text"
+                value={movieName}
+                onChange={updateQuery}
+            />
             <Container>
                 <MovieList>
                     {movies.map(movie => {
@@ -53,6 +67,4 @@ const Home = () => {
             </Container>
         </>
     );
-};
-
-export default Home;
+}

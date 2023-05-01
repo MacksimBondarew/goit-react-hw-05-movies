@@ -4,6 +4,7 @@ import Home from '../pages/Home';
 import MovieDetails from './Markup/MoviesDetails';
 import Cast from './Markup/Cast';
 import Reviews from './Markup/Reviews';
+import Movies from 'pages/Movies';
 
 
 export const App = () => {
@@ -17,7 +18,7 @@ export const App = () => {
                     ></Route>
                     <Route
                         path="/movies"
-                        element={<div>React homework movies</div>}
+                        element={<Movies />}
                     ></Route>
                     <Route path="/movies/:movieId" element={<MovieDetails />}>
                         <Route path="cast" element={<Cast />}></Route>
