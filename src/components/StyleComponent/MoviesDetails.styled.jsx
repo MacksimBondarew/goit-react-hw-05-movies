@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
     padding-left: 20px;
@@ -30,6 +31,10 @@ export const Container = styled.div`
     @media screen and (min-width: 768px) {
         gap: 29px;
         flex-wrap: nowrap;
+    }
+
+    &:last-child {
+        padding-top: 20px;
     }
 `;
 export const Wrapper = styled.div`
@@ -81,4 +86,34 @@ export const GenreItem = styled.li`
     padding: 5px 10px;
     border-radius: 5px;
     background-color: #eee;
+`;
+
+export const List = styled.ul`
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+`;
+
+export const ListItem = styled.li`
+    list-style-type: none;
+    &:last-child {
+        margin-left: 20px;
+    }
+`;
+
+export const NavLink = styled(Link)`
+text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    line-height: 1.14;
+    padding: 20px 20px;
+    background-color: #AFEEEE;
+    border-radius: 50px;
+    color: black;
+    display: inline-block;
 `;

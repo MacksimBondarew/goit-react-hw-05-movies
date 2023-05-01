@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Outlet } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import {
@@ -10,8 +10,11 @@ import {
     OverviewText,
     GenreList,
     GenreItem,
-    Wrapper
-} from '../components/StyleComponent/MoviesDetails.styled';
+    Wrapper,
+    ListItem,
+    List,
+    NavLink,
+} from '../StyleComponent/MoviesDetails.styled';
 
 const MovieDetails = () => {
     const [allInformation, setAllInformation] = useState({});
@@ -23,8 +26,7 @@ const MovieDetails = () => {
                 const response = await axios.get(
                     `https://api.themoviedb.org/3/movie/${id}?api_key=3371eb177fbad0ff5df328740d3861be&language=en-US`
                 );
-                const responseMovie = await response.data;
-                return responseMovie;
+                return response.data;
             } catch (error) {
                 console.log('Помилка при отримані повної інформації');
             }
@@ -65,7 +67,19 @@ const MovieDetails = () => {
                                 </GenreItem>
                             ))}
                     </GenreList>
+                    <List>
+                        <ListItem>
+                            <NavLink to="cast">cast</NavLink>
+                        </ListItem>
+                        <ListItem>
+                            <NavLink to="reviews">reviews</NavLink>
+                        </ListItem>
+                    </List>
                 </Wrapper>
+                <Wrapper></Wrapper>
+            </Container>
+            <Container>
+                <Outlet />
             </Container>
         </>
     );
