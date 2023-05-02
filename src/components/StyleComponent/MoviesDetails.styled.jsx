@@ -21,7 +21,6 @@ export const Container = styled.div`
     display: block;
     gap: 60px;
     display: flex;
-    justify-content: center;
     margin: 0 auto;
     flex-wrap: wrap;
     @media screen and (min-width: 768px) {
@@ -33,12 +32,12 @@ export const Container = styled.div`
         flex-wrap: nowrap;
     }
 
-    &:last-child {
-        padding-top: 20px;
-    }
+    padding-top: 20px;
 `;
 export const Wrapper = styled.div`
-    text-align: center;
+    &:nth-child(2) {
+        text-align: center;
+    };
 `;
 export const Title = styled.h1`
     font-size: 2.5rem;
@@ -106,14 +105,30 @@ export const ListItem = styled.li`
 `;
 
 export const NavLink = styled(Link)`
-text-decoration: none;
+    text-decoration: none;
     font-weight: 500;
     font-size: 20px;
     letter-spacing: 0.02em;
     line-height: 1.14;
     padding: 20px 20px;
-    background-color: #AFEEEE;
+    background-color: #afeeee;
     border-radius: 50px;
     color: black;
     display: inline-block;
+`;
+export const StyledLink = styled(Link)`
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #fff;
+    background-color: #0077cc;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+        background-color: #005fa3;
+    }
 `;

@@ -1,6 +1,6 @@
-import { useParams, Outlet } from 'react-router-dom';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
     Container,
     Title,
@@ -14,11 +14,14 @@ import {
     ListItem,
     List,
     NavLink,
+    StyledLink,
 } from '../StyleComponent/MoviesDetails.styled';
 
 const MovieDetails = () => {
     const [allInformation, setAllInformation] = useState({});
     const { movieId } = useParams();
+    const location = useLocation();
+    const backLinkLocation = useRef(location.state?.from ?? '/');
 
     useEffect(() => {
         async function movieName(id) {
@@ -26,22 +29,21 @@ const MovieDetails = () => {
                 const response = await axios.get(
                     `https://api.themoviedb.org/3/movie/${id}?api_key=3371eb177fbad0ff5df328740d3861be&language=en-US`
                 );
-                return response.data;
+                setAllInformation(response.data);
             } catch (error) {
                 console.log('Помилка при отримані повної інформації');
             }
         }
-        async function getInformation() {
-            const getMovie = await movieName(movieId);
-            setAllInformation(getMovie);
-        }
-        getInformation();
+        movieName(movieId);
     }, [movieId]);
 
     const { title, poster_path, genres, overview, vote_average } =
         allInformation;
     return (
         <>
+            <Container>
+                <StyledLink to={backLinkLocation.current}>Go back</StyledLink>
+            </Container>
             <Container>
                 <Wrapper>
                     <MoviePoster

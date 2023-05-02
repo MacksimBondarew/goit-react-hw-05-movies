@@ -6,20 +6,13 @@ import Cast from './Markup/Cast';
 import Reviews from './Markup/Reviews';
 import Movies from 'pages/Movies';
 
-
 export const App = () => {
     return (
         <>
             <Routes>
                 <Route path="/" element={<SharedLayout />}>
-                    <Route
-                        index
-                        element={<Home />}
-                    ></Route>
-                    <Route
-                        path="/movies"
-                        element={<Movies />}
-                    ></Route>
+                    <Route index element={<Home />}></Route>
+                    <Route path="/movies" element={<Movies />}></Route>
                     <Route path="/movies/:movieId" element={<MovieDetails />}>
                         <Route path="cast" element={<Cast />}></Route>
                         <Route path="reviews" element={<Reviews />}></Route>

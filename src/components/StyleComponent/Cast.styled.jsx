@@ -1,4 +1,4 @@
-const { default: styled } = require("styled-components");
+const { default: styled } = require('styled-components');
 
 export const ImgCredit = styled.img`
     width: 200px;
@@ -7,7 +7,7 @@ export const ImgCredit = styled.img`
     display: inline-block;
 `;
 export const ListCredits = styled.ul`
-display: block;
+    display: block;
     gap: 20px;
     display: flex;
     justify-content: center;

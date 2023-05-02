@@ -18,16 +18,12 @@ export default function Reviews() {
                 const response = await axios.get(
                     `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=3371eb177fbad0ff5df328740d3861be&language=en-US`
                 );
-                return response.data.results;
+                setRewiews(response.data.results);
             } catch (error) {
                 console.log('Ти отримав помилку на акторах');
             }
         }
-        async function informationRewiews() {
-            const getReviews = await getInformationRewiews(movieId);
-            setRewiews(getReviews);
-        }
-        informationRewiews();
+        getInformationRewiews(movieId);
     }, [movieId]);
     return (
         <ListReviews>

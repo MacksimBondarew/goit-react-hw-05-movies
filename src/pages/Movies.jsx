@@ -1,18 +1,21 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import { Container } from 'components/StyleComponent/MoviesDetails.styled';
 import {
     MovieList,
     MovieItem,
     MovieLink,
     ImgPages,
+    Form,
 } from '../components/StyleComponent/Pages.styled';
 
 export default function Movies() {
     const [movies, setMovies] = useState([]);
+    const [search, setSearch] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
     const movieName = searchParams.get('movieName') ?? '';
+    const location = useLocation();
     useEffect(() => {
         async function getQuery(query) {
             try {
@@ -24,30 +27,38 @@ export default function Movies() {
                 console.log('Помилка на пошуку');
             }
         }
-        getQuery(movieName)
+        getQuery(movieName);
     }, [movieName]);
+
+    useEffect(() => {
+        setSearch(movieName);
+    }, [movieName]);
+    const handleChange = evt => {
+        setSearch(evt.target.value);
+    };
+
     const updateQuery = evt => {
-        const movieNameValue = evt.target.value;
-        if (movieNameValue === '') {
+        evt.preventDefault();
+        if (search === '') {
             return setSearchParams({});
         }
-        setSearchParams({ movieName: movieNameValue });
+        setSearchParams({ movieName: search });
     };
 
     return (
         <>
-            <input
-                type="text"
-                value={movieName}
-                onChange={updateQuery}
-            />
+            <Form onSubmit={updateQuery}>
+                <input type="text" value={search} onChange={handleChange} />
+                <button type="submit">search</button>
+            </Form>
             <Container>
                 <MovieList>
                     {movies.map(movie => {
                         return (
                             <MovieItem key={movie.id}>
                                 <Link
-                                    to={`movies/${movie.id}`}
+                                    state={{ from: location }}
+                                    to={`${movie.id}`}
                                     style={{ textDecoration: 'none' }}
                                 >
                                     <MovieLink>{movie.title}</MovieLink>

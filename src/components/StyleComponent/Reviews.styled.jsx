@@ -15,7 +15,7 @@ export const ItemReviews = styled.li`
 export const Author = styled.h4`
     font-size: 20px;
     margin-bottom: 10px;
-    color: #B22222;
+    color: #b22222;
 `;
 
 export const Content = styled.p`

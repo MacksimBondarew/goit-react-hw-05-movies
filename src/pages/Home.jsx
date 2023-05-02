@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { Container } from 'components/StyleComponent/MoviesDetails.styled';
 import {
@@ -6,11 +7,13 @@ import {
     MovieItem,
     MovieLink,
     ImgPages,
+    Title,
 } from '../components/StyleComponent/Pages.styled';
-import { Link } from 'react-router-dom';
 
 const Home = () => {
     const [movies, setMovies] = useState([]);
+    const location = useLocation();
+
     useEffect(() => {
         async function getMovies() {
             try {
@@ -26,7 +29,7 @@ const Home = () => {
     }, []);
     return (
         <>
-            <h1>Trending today</h1>
+            <Title>Trending today</Title>
             <Container>
                 <MovieList>
                     {movies.map(movie => {
@@ -34,6 +37,7 @@ const Home = () => {
                             <MovieItem key={movie.id}>
                                 <Link
                                     to={`movies/${movie.id}`}
+                                    state={{ from: location }}
                                     style={{ textDecoration: 'none' }}
                                 >
                                     <MovieLink>{movie.title}</MovieLink>
