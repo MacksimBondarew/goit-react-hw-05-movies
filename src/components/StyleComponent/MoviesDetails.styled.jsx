@@ -33,6 +33,9 @@ export const Container = styled.div`
     }
 
     padding-top: 20px;
+    &:last-child {
+        justify-content: center;
+    }
 `;
 export const Wrapper = styled.div`
     &:nth-child(2) {

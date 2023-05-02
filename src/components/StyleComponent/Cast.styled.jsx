@@ -33,3 +33,10 @@ export const NameCredit = styled.p`
         color: red;
     }
 `;
+export const Error = styled.h1`
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #ff4d4f;
+    margin-top: 20px;
+`;

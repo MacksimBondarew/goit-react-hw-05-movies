@@ -6,6 +6,7 @@ import {
     ItemCredit,
     ListCredits,
     NameCredit,
+    Error
 } from '../StyleComponent/Cast.styled';
 
 export default function Cast() {
@@ -26,6 +27,9 @@ export default function Cast() {
     }, [movieId]);
     return (
         <ListCredits>
+            {credits < 1 && (
+                <Error>We don`t have any reviews for this movie!</Error>
+            )}
             {credits.map(credit => (
                 <ItemCredit key={credit.id && credit.id}>
                     <ImgCredit

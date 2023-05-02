@@ -1,7 +1,9 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { Header, Nav } from '../StyleComponent/SharedLayout.styled';
+import { Suspense } from 'react';
+import { DotLoader } from 'react-spinners';
 
-export const SharedLayout = () => {
+const SharedLayout = () => {
     return (
         <>
             <Header>
@@ -10,7 +12,21 @@ export const SharedLayout = () => {
                     <NavLink to="/movies">Movies</NavLink>
                 </Nav>
             </Header>
-            <Outlet />
+            <Suspense
+                fallback={
+                    <DotLoader
+                        style={{textAlign: 'center'}}
+                        color="#3682d6"
+                        cssOverride={{}}
+                        loading
+                        size={70}
+                    />
+                }
+            >
+                <Outlet />
+            </Suspense>
         </>
     );
 };
+
+export default SharedLayout;

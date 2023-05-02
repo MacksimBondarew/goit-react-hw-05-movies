@@ -1,6 +1,6 @@
 import { useParams, Outlet, useLocation } from 'react-router-dom';
 import axios from 'axios';
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import {
     Container,
     Title,
@@ -16,6 +16,7 @@ import {
     NavLink,
     StyledLink,
 } from '../StyleComponent/MoviesDetails.styled';
+import { DotLoader } from 'react-spinners';
 
 const MovieDetails = () => {
     const [allInformation, setAllInformation] = useState({});
@@ -81,7 +82,17 @@ const MovieDetails = () => {
                 <Wrapper></Wrapper>
             </Container>
             <Container>
-                <Outlet />
+                <Suspense fallback={
+                    <DotLoader
+                        style={{textAlign: 'center'}}
+                        color="#3682d6"
+                        cssOverride={{}}
+                        loading
+                        size={70}
+                    />
+                }>
+                    <Outlet />
+                </Suspense>
             </Container>
         </>
     );
