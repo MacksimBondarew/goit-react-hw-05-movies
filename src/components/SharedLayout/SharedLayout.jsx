@@ -15,7 +15,7 @@ const SharedLayout = () => {
             <Suspense
                 fallback={
                     <DotLoader
-                        style={{textAlign: 'center'}}
+                        style={{ textAlign: 'center' }}
                         color="#3682d6"
                         cssOverride={{}}
                         loading
