@@ -12,17 +12,18 @@ import {
 export default function Reviews() {
     const [reviews, setRewiews] = useState([]);
     const { movieId } = useParams();
-    useEffect(() => {
-        async function getInformationRewiews(id) {
-            try {
-                const response = await axios.get(
-                    `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=3371eb177fbad0ff5df328740d3861be&language=en-US`
-                );
-                setRewiews(response.data.results);
-            } catch (error) {
-                console.log('Ти отримав помилку на акторах');
-            }
+
+    async function getInformationRewiews(id) {
+        try {
+            const response = await axios.get(
+                `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=3371eb177fbad0ff5df328740d3861be&language=en-US`
+            );
+            setRewiews(response.data.results);
+        } catch (error) {
+            console.log('Ти отримав помилку на акторах');
         }
+    }
+    useEffect(() => {
         getInformationRewiews(movieId);
     }, [movieId]);
     return (

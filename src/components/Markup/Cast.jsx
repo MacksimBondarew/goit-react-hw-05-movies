@@ -12,17 +12,19 @@ import {
 export default function Cast() {
     const [credits, setCredits] = useState([]);
     const { movieId } = useParams();
-    useEffect(() => {
-        async function getInformationCredits(id) {
-            try {
-                const response = await axios.get(
-                    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=3371eb177fbad0ff5df328740d3861be&language=en-US`
-                );
-                setCredits(response.data.cast);
-            } catch (error) {
-                console.log('Ти отримав помилку на акторах');
-            }
+
+    async function getInformationCredits(id) {
+        try {
+            const response = await axios.get(
+                `https://api.themoviedb.org/3/movie/${id}/credits?api_key=3371eb177fbad0ff5df328740d3861be&language=en-US`
+            );
+            setCredits(response.data.cast);
+        } catch (error) {
+            console.log('Ти отримав помилку на акторах');
         }
+    };
+    
+    useEffect(() => {
         getInformationCredits(movieId);
     }, [movieId]);
     return (

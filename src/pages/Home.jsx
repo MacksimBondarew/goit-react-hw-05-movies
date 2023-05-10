@@ -13,18 +13,19 @@ import {
 const Home = () => {
     const [movies, setMovies] = useState([]);
     const location = useLocation();
+    
+    async function getMovies() {
+        try {
+            const response = await axios.get(
+                'https://api.themoviedb.org/3/trending/movie/day?api_key=3371eb177fbad0ff5df328740d3861be'
+            );
+            setMovies(response.data.results);
+        } catch (error) {
+            console.log('помилка на отримані трендів');
+        }
+    };
 
     useEffect(() => {
-        async function getMovies() {
-            try {
-                const response = await axios.get(
-                    'https://api.themoviedb.org/3/trending/movie/day?api_key=3371eb177fbad0ff5df328740d3861be'
-                );
-                setMovies(response.data.results);
-            } catch (error) {
-                console.log('помилка на отримані трендів');
-            }
-        }
         getMovies();
     }, []);
     return (

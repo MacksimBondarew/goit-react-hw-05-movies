@@ -16,17 +16,19 @@ export default function Movies() {
     const [searchParams, setSearchParams] = useSearchParams();
     const movieName = searchParams.get('movieName') ?? '';
     const location = useLocation();
-    useEffect(() => {
-        async function getQuery(query) {
-            try {
-                const response = await axios.get(
-                    `https://api.themoviedb.org/3/search/movie?api_key=3371eb177fbad0ff5df328740d3861be&language=en-US&query=${query}`
-                );
-                setMovies(response.data.results);
-            } catch (error) {
-                console.log('Помилка на пошуку');
-            }
+    
+    async function getQuery(query) {
+        try {
+            const response = await axios.get(
+                `https://api.themoviedb.org/3/search/movie?api_key=3371eb177fbad0ff5df328740d3861be&language=en-US&query=${query}`
+            );
+            setMovies(response.data.results);
+        } catch (error) {
+            console.log('Помилка на пошуку');
         }
+    };
+
+    useEffect(() => {
         getQuery(movieName);
     }, [movieName]);
 

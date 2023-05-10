@@ -24,17 +24,18 @@ const MovieDetails = () => {
     const location = useLocation();
     const backLinkLocation = useRef(location.state?.from ?? '/');
 
-    useEffect(() => {
-        async function movieName(id) {
-            try {
-                const response = await axios.get(
-                    `https://api.themoviedb.org/3/movie/${id}?api_key=3371eb177fbad0ff5df328740d3861be&language=en-US`
-                );
-                setAllInformation(response.data);
-            } catch (error) {
-                console.log('Помилка при отримані повної інформації');
-            }
+    async function movieName(id) {
+        try {
+            const response = await axios.get(
+                `https://api.themoviedb.org/3/movie/${id}?api_key=3371eb177fbad0ff5df328740d3861be&language=en-US`
+            );
+            setAllInformation(response.data);
+        } catch (error) {
+            console.log('Помилка при отримані повної інформації');
         }
+    };
+
+    useEffect(() => {
         movieName(movieId);
     }, [movieId]);
 
